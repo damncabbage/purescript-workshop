@@ -1,0 +1,9 @@
+/node_modules
+/bower_components
+/devdocs
+/output
+/dist
+/.psci_modules
+/npm-debug.log
+/.psci
+**DS_Store
