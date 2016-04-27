@@ -54,12 +54,12 @@ foreign import playFreq
 
 playHigh :: forall eff. Eff (dom :: DOM, webaudio :: WEBAUDIO | eff) Unit
 playHigh = createWindowAudioContext >>= \c ->
-             playFreq c 391.99543598174995 closeAudioContext --
+             playFreq c 391.9 closeAudioContext
 
 playMid  :: forall eff. Eff (dom :: DOM, webaudio :: WEBAUDIO  | eff) Unit
 playMid = createWindowAudioContext >>= \c ->
-            playFreq c 261.62556530059896 closeAudioContext -- C3
+            playFreq c 310.0 closeAudioContext
 
 playLow  :: forall eff. Eff (dom :: DOM, webaudio :: WEBAUDIO  | eff) Unit
 playLow = createWindowAudioContext >>= \c ->
-            playFreq c 164.81377845643513 closeAudioContext -- E2
+            playFreq c 261.6 closeAudioContext

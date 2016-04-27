@@ -59,11 +59,6 @@ exports.playFreq = function(ac) {
         var release  = 0.1;
         var volume   = 1;
 
-        /*
-        var AudioContext = window.AudioContext || window.webkitAudioContext;
-        var ac = new AudioContext();
-        */
-
         var oscillator = ac.createOscillator();
 
         oscillator.frequency.value = freq;
@@ -81,22 +76,9 @@ exports.playFreq = function(ac) {
         oscillator.onended = function(){
           // Disconnect
           oscillator.disconnect();
-          //ac.close();
-          endedCb(ac);
+          endedCb(ac)();
         };
       };
     };
   };
 };
-
-/*
-exports.playHigh = function() {
-  playFreq(391.99543598174995); // G3
-};
-exports.playMid = function() {
-  playFreq(261.62556530059896); // C3
-};
-exports.playLow = function() {
-  playFreq(164.81377845643513); // E2
-};
-*/
