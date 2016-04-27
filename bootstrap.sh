@@ -97,8 +97,8 @@ else
 fi
 
 # psc, pulp and some editor tools
-if prompt "install purescript@0.8.5 pulp purescript-psa and pscid globally with npm install -g"; then
-  npm install -g purescript@0.8.5 pulp purescript-psa pscid
+if prompt "install purescript@0.8.5 pulp purescript-psa bower and pscid globally with npm install -g"; then
+  npm install -g purescript@0.8.5 pulp purescript-psa pscid bower
 fi
 
 # bower installs
