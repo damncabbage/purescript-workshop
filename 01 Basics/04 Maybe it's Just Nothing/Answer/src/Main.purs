@@ -15,9 +15,11 @@ data MaybeThrown = NotThrown | Thrown Hand
 --   ^== The type.   ^===========^========= The values.
 
 -- Producing a MaybeThrown value:
-throwOnlyOnRock :: Hand -> MaybeThrown -- Hand -> our new type
-throwOnlyOnRock Rock = Thrown Rock -- Constructing a value; Thrown takes one argumnet
-throwOnlyOnRock hand = NotThrown   -- Ditto; NotThrown takes no arguments.
+throwByTheNumbers :: Int -> MaybeThrown -- Int -> our new type
+throwByTheNumbers 1 = Thrown Rock -- Constructing a value; Thrown takes one argumnet
+throwByTheNumbers 2 = Thrown Paper
+throwByTheNumbers 3 = Thrown Scissors
+throwByTheNumbers hand = NotThrown -- Constructing a value, but NotThrown takes _no_ arguments.
 
 -- Interpreting a MaybeThrown value:
 hasThrown :: MaybeThrown -> Boolean
@@ -69,13 +71,16 @@ getFirst a b = a
 ---- Exercise ----
 -- TODO: Write throwOnlyRock and hasThrown again, except using the general Maybe type with Hand.
 
-throwOnlyOnRock2 :: Hand -> Maybe Hand
-throwOnlyOnRock2 Rock = Just Rock
-throwOnlyOnRock2 x    = Nothing
+-- Producing a MaybeThrown value:
+throwByTheNumbersV2 :: Int -> Maybe Hand -- Int -> our new type
+throwByTheNumbersV2 1 = Just Rock -- Constructing a value; Just takes one argumnet
+throwByTheNumbersV2 2 = Just Paper
+throwByTheNumbersV2 3 = Just Scissors
+throwByTheNumbersV2 hand = Nothing -- Constructing a value, but NotJust takes _no_ arguments.
 
-hasThrown2 :: Maybe Hand -> Boolean
-hasThrown2 (Just h) = true
-hasThrown2 Nothing  = false
+hasThrownV2 :: Maybe Hand -> Boolean
+hasThrownV2 (Just h) = true
+hasThrownV2 Nothing  = false
 -- Or: isJust from the Data.Maybe module.
 
 

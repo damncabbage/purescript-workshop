@@ -15,9 +15,11 @@ data MaybeThrown = NotThrown | Thrown Hand
 --   ^== The type.   ^===========^========= The values.
 
 -- Producing a MaybeThrown value:
-throwOnlyOnRock :: Hand -> MaybeThrown -- Hand -> our new type
-throwOnlyOnRock Rock = Thrown Rock -- Constructing a value; Thrown takes one argumnet
-throwOnlyOnRock hand = NotThrown   -- Ditto; NotThrown takes no arguments.
+throwByTheNumbers :: Int -> MaybeThrown -- Int -> our new type
+throwByTheNumbers 1 = Thrown Rock -- Constructing a value; Thrown takes one argumnet
+throwByTheNumbers 2 = Thrown Paper
+throwByTheNumbers 3 = Thrown Scissors
+throwByTheNumbers hand = NotThrown -- Constructing a value, but NotThrown takes _no_ arguments.
 
 -- Interpreting a MaybeThrown value:
 hasThrown :: MaybeThrown -> Boolean
@@ -67,10 +69,10 @@ getFirst a b = a
 
 
 ---- Exercise ----
--- TODO: Write throwOnlyRock and hasThrown again, except using the general Maybe type with Hand.
+-- TODO: Write throwByTheNumbers and hasThrown again, except using the general Maybe type with Hand.
 
--- throwOnlyOnRock2 :: ...
--- hasThrown2 :: ...
+-- throwByTheNumbersV2 :: ...
+-- hasThrownV2 :: ...
 
 
 -- TODO: Write a function that takes an Array of hands, and returns a Hand. 
