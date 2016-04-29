@@ -33,7 +33,7 @@ function installNodeMac() {
       echo -e "\nCan't find a version of Node available on Homebrew matching ${NODE_VERSION_REGEX} - you may need to update your local formula cache by running:\n  brew update\n"
       exit 1
     fi
-    "$HOMEBREW" install node # v4+, including 5
+    "$HOMEBREW" install homebrew/versions/node4-lts # v4-6
   fi
 }
 
@@ -67,7 +67,7 @@ if [ "$NODE_CODE" -eq 0 ]; then
   if [ "$(echo "$NODE_VERSION" | grep -c "^v${NODE_VERSION_REGEX}")" -eq 1 ]; then
     echo "*** Node.js ${NODE_VERSION} already installed."
   else
-    echo "*** Node.js already installed, but expected version matching ${NODE_REGEX} - found ${NODE_VERSION} instead."
+    echo "*** Node.js already installed, but expected version matching ${NODE_VERSION_REGEX} - found ${NODE_VERSION} instead."
     exit 1
   fi
 else
@@ -97,8 +97,8 @@ else
 fi
 
 # psc, pulp and some editor tools
-if prompt "install purescript@0.8.5 pulp purescript-psa and pscid globally with npm install -g"; then
-  npm install -g purescript@0.8.5 pulp purescript-psa pscid
+if prompt "install purescript@0.8.5 bower pulp purescript-psa and pscid globally with npm install -g"; then
+  npm install -g purescript@0.8.5 bower pulp purescript-psa pscid
 fi
 
 # bower installs
