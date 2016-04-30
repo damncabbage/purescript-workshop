@@ -84,7 +84,7 @@ changeState loc newState = loc { state = newState }
 
 -- TODO: Write a type alias that is an Object ({}-shorthand or not) and has two fields, x and y, both Ints. Call it Point.
 
--- TODO: Write a function that takes a Point and an Int, and replace the paint's X value with that Int.
+-- TODO: Write a function that takes a Point and an Int, and replace the point's X value with that Int.
 
 -- TODO: Write a function that takes two points, and calculates the distance between them, returning a Number,
 --       a type representing numbers that can include a decimal point.
