@@ -6,24 +6,21 @@ This is a set of exercises for [YOW! Lamba Jam 2016](http://lambdajam.yowconfere
 
 ## Setup
 
-Before starting:
+[Context: This workshop was meant to be tackled from inside a virtual machine (Virtualbox w/ an OVA). A bootstrap script was also provided in case people wanted to set up PureScript on their own machines.]
 
-* If you are reading this from inside the Workshop VM, everything is set up and ready to go; this
-  file should be sitting in a `workshop` folder off the home directory.
+To get started:
 
-* If you've chosen to set this up independently, this will be a bit more complicated so we need to
-  assume you know what you're doing:
-  1. Clone this git repo to somewhere local on your machine,
-  2. Run the bootstrap setup script (with `./bootstrap.sh from inside the checked-out workshop directory).
-     This script will:
-     * Check and install any tools you need (Node, npm, PureScript / pcs, Pulp, purescript-psa, pscid), and
-     * Run a `bower install`, `npm install` and an `npm run -s build` on every exercise, to prepare
-       the exercises for you in advance (eg. if you're only connected to the 'net for a short while).
+1. Clone this git repo to somewhere local on your machine,
+2. Run the bootstrap setup script (with `./bootstrap.sh`, from inside the checked-out workshop directory).
+   This script will:
+   * Check and install any tools you need (Node, npm, PureScript / pcs, Pulp, purescript-psa, pscid), and
+   * Run a `bower install`, `npm install` and an `npm run -s build` on every exercise, to prepare
+     the exercises for you in advance (eg. if you're only connected to the 'net for a short while).
 
-It's recommended that you use an editor with some PureScript integration. The VM has
+It's recommended that you use an editor with some PureScript integration. I recommend
 [Atom](https://atom.io/) set up with the [atom-ide-purescript](https://github.com/nwolverson/atom-ide-purescript)
-plugin installed already. Alternatively, [pscid](https://github.com/kRITZCREEK/pscid) is already installed
-and can be used as a file-watch + fast-rebuild tool with any editor.
+plugin, opening each exercise as a separate project. Alternatively, [pscid](https://github.com/kRITZCREEK/pscid) is
+an alternative that can be used as a file-watch + fast-rebuild tool with any editor.
 
 
 ## Exercises
@@ -36,7 +33,7 @@ in the following way:
   display errors and warnings. If you're using the VM with the Atom editor, this is being run for
   you on every save.
 * **Test:** `npm run test` will run any tests defined.
-* **REPL:** `npm run repl` will kick off `pulp psci`, an interactive command-line tool (like GHCI,
+* **Interactive Console Tool (REPL):** `npm run repl` will kick off `pulp psci`, an interactive command-line tool (like GHCI,
   `irb`, or `node` or `python` without arguments). Hit Ctrl-C to quit.
 * **Server:** Some later exercises have a web-based component; `npm run start` will start the
   Webpack+Express dev server, which also provides hot-reloading for quick feedback. Hit Ctrl-C to
