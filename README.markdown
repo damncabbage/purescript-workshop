@@ -29,13 +29,13 @@ The exercises are broken up into sections and sub-sections, with each having its
 and Answer folders. Every Exercise and Answer is an independent program that can be interacted with
 in the following way:
 
-* **Build:** `npm run build` in an Exercise or Answer directory will rebuild that program and
+* **Build:** `npm run -S build` in an Exercise or Answer directory will rebuild that program and
   display errors and warnings. If you're using the VM with the Atom editor, this is being run for
   you on every save.
-* **Test:** `npm run test` will run any tests defined.
+* **Test:** `npm run -S test` will run any tests defined.
 * **Interactive Console Tool (REPL):** `npm run repl` will kick off `pulp psci`, an interactive command-line tool (like GHCI,
   `irb`, or `node` or `python` without arguments). Hit Ctrl-C to quit.
-* **Server:** Some later exercises have a web-based component; `npm run start` will start the
+* **Server:** Some later exercises have a web-based component; `npm run -S start` will start the
   Webpack+Express dev server, which also provides hot-reloading for quick feedback. Hit Ctrl-C to
   stop it.
 
