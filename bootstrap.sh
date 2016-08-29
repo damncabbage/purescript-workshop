@@ -103,20 +103,20 @@ if [ "$(echo "$PATH" | grep -c 'node_modules/\.bin')" -eq 0 ]; then
   fi
 fi
 
-if prompt "npm install and bower install"; then
+if prompt "npm install and bower install the exercise dependencies"; then
   pushd "common/console"
     bower install
     npm install
-    for DIR in 0{1,2}*/*/{Exercise,Answer}; do
-      cp -a node_modules "../../${DIR}/"
+    for DIR in ../../0{1,2}*/*/*s*; do
+      cp -a node_modules "${DIR}/"
     done
   popd
 
   pushd "common/web"
     bower install
     npm install
-    for DIR in 0{3,4}*/*/{Exercise,Answer}; do
-      cp -a node_modules "../../${DIR}/"
+    for DIR in ../../0{3,4}*/*/*s*; do
+      cp -a node_modules "${DIR}/"
     done
   popd
 fi

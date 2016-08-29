@@ -11,5 +11,8 @@
   "dependencies": {
     "purescript-pux": "^5.0.1",
     "purescript-pux-devtool": "^3.0.0"
+  },
+  "devDependencies": {
+    "purescript-debug": "^1.0.0"
   }
 }
