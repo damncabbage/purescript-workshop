@@ -32,8 +32,10 @@ data Action = Throw Hand
             | ResetGame
             | None
 
-update :: forall eff. Action -> State
-       -> EffModel State Action (dom :: DOM, random :: RANDOM, webaudio :: WEBAUDIO | eff)
+update
+  :: Action
+  -> State
+  -> EffModel State Action (dom :: DOM, random :: RANDOM, webaudio :: WEBAUDIO)
 update None           state = noEffects state
 update ResetGame      state = noEffects init
 update (Throw p1Hand) state = {

@@ -8,6 +8,7 @@ import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Random (randomInt, RANDOM)
 import Data.Array (last)
 import Data.Maybe (maybe)
+import Data.Generic (class Generic, gShow)
 
 data Hand   = Rock  | Paper | Scissors
 data Result = P1Won | P2Won | Draw
@@ -92,11 +93,8 @@ arsAI rounds =
 
 
 ----- Unfortunate debugging boilerplate: -----
-import Data.Generic (class Generic, gShow)
-
 derive instance genHand :: Generic Hand
 derive instance genResult :: Generic Result
-
 instance showHand :: Show Hand where
   show = gShow
 instance showResult :: Show Result where
