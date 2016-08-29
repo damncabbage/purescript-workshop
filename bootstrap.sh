@@ -33,7 +33,7 @@ function installNodeMac() {
       echo -e "\nCan't find a version of Node available on Homebrew matching ${NODE_VERSION_REGEX} - you may need to update your local formula cache by running:\n  brew update\n"
       exit 1
     fi
-    "$HOMEBREW" install homebrew/versions/node4-lts # v4-6
+    "$HOMEBREW" install node
   fi
 }
 
@@ -59,7 +59,7 @@ function installNodeDebian() {
 set +e
   NODE=$(which node)
   NODE_CODE=$?
-  export NODE_VERSION_REGEX='[45]\.'
+  export NODE_VERSION_REGEX='[456]\.'
 set -e
 
 if [ "$NODE_CODE" -eq 0 ]; then
