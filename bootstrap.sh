@@ -103,13 +103,14 @@ if [ "$(echo "$PATH" | grep -c 'node_modules/\.bin')" -eq 0 ]; then
   fi
 fi
 
-if prompt "npm install and bower install the exercise dependencies"; then
+if prompt "npm install, bower install and generate devdocs for the exercise dependencies"; then
   pushd "common/console"
     bower install
     npm install
     for DIR in ../../0{1,2}*/*/*s*; do
       cp -a node_modules "${DIR}/"
     done
+    "${SCRIPT_DIR}/devdocs.sh"
   popd
 
   pushd "common/web"
@@ -118,12 +119,13 @@ if prompt "npm install and bower install the exercise dependencies"; then
     for DIR in ../../0{3,4}*/*/*s*; do
       cp -a node_modules "${DIR}/"
     done
+    "${SCRIPT_DIR}/devdocs.sh"
   popd
 fi
 
 # npm run build
-if prompt "generate development documentation and attempt builds for every exercise directory"; then
+if prompt "attempt builds for every exercise directory"; then
   for DIR in Exercise Answer; do
-    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && '"$SCRIPT_DIR"'/devdocs.sh && npm run -s build' \;
+    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && npm run -s build' \;
   done
 fi

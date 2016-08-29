@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -eu
 
 ACK=$(which ack)
 if [ -z "$ACK" ]; then
@@ -18,6 +18,12 @@ if [ -d "$DOCSDIR" ]; then
 fi
 
 echo "Generating docs to $DOCSDIR ..."
-ARGS=$("$ACK" --no-filename -r -o '^module[ ]+[\.A-Za-z0-9_-]+' ./src ./bower_components/purescript-*/src | sed -e 's/^module  *//' | sed -e 's/\(.*\)/--docgen \1:'"$(echo "$DOCSDIR" | sed -e 's/\//\\\//g')"'\/\1.md/')
-psc-docs 'src/**/*.purs' 'bower_components/purescript-*/src/**/*.purs' $ARGS
-echo "Done (generated $(ls -1 "$DOCSDIR" | wc -l | sed -e 's/ //g') docs)."
+for DIR in ./bower_components/purescript-*; do
+  if [ $(echo "$DIR" | grep -c "purescript-list") -eq 1 ]; then continue; fi  # Look, I don't know, it just chokes.
+
+  ARGS=$("$ACK" --no-filename -r -o '^module[ ]+[\.A-Za-z0-9_-]+' "$DIR"/src | sed -e 's/^module  *//' | sed -e 's/\(.*\)/--docgen \1:'"$(echo "$DOCSDIR" | sed -e 's/\//\\\//g')"'\/\1.md/')
+  echo -n " => $DIR"
+  psc-docs 'bower_components/purescript-*/src/**/*.purs' $ARGS
+  echo ' ... Done.'
+done
+echo " Done (generated $(ls -1 "$DOCSDIR" | wc -l | sed -e 's/ //g') docs)."
