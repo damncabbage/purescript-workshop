@@ -4,6 +4,7 @@ module App.Game where
 -- Go down to "AI" below:
 
 import Prelude
+import Data.Generic (class Generic, gShow) -- Ignore this.
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Random (randomInt, RANDOM)
 import Data.Array (last)
@@ -11,8 +12,8 @@ import Data.Maybe (maybe)
 
 data Hand   = Rock  | Paper | Scissors
 data Result = P1Won | P2Won | Draw
-derive instance eqHand   :: Eq Hand   -- Makes Hand and Result
-derive instance eqResult :: Eq Result -- comparable with ==
+derive instance eqHand   :: Eq Hand   -- Makes Hand and Result ...
+derive instance eqResult :: Eq Result -- ... comparable with ==
 
 type PlayerPair a = { p1 :: a, p2 :: a }
 type Round        = PlayerPair Hand
@@ -84,8 +85,6 @@ currentAI = randomAI
 
 
 ----- Unfortunate debugging boilerplate: -----
-import Data.Generic (class Generic, gShow)
-
 derive instance genHand :: Generic Hand
 derive instance genResult :: Generic Result
 

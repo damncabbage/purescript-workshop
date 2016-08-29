@@ -1,33 +1,44 @@
 module Main where
 
-import Prelude
-import App.Routes as Routes
+import App.Routes (match)
 import App.Types (AppEffects)
 import App.Layout (Action(PageView), State, view, update)
+import Control.Bind ((=<<))
 import Control.Monad.Eff (Eff)
-import Debug.Trace (traceAny)
-import Pux (App, CoreEffects, start, renderToDOM)
+import DOM (DOM)
+import Prelude (bind, pure)
+import Pux (App, Config, CoreEffects, renderToDOM, start)
+import Pux.Devtool (Action, start) as Pux.Devtool
 import Pux.Router (sampleUrl)
 import Signal ((~>))
 
--- | Entry point for the browser.
-main :: forall eff. State -> Eff (CoreEffects (AppEffects eff)) (App State Action)
-main state = do
+-- | App configuration
+config :: forall eff. State -> Eff (dom :: DOM | eff) (Config State Action AppEffects)
+config state = do
   -- | Create a signal of URL changes.
   urlSignal <- sampleUrl
 
   -- | Map a signal of URL changes to PageView actions.
-  let routeSignal = urlSignal ~> \r -> PageView (Routes.match r)
+  let routeSignal = urlSignal ~> \r -> PageView (match r)
 
-  app <- start
+  pure
     { initialState: state
-    , update:
-        -- | Logs all actions and states (removed in production builds).
-        (\a s -> traceAny {action: a, state: s} (\_ -> update a s))
+    , update: update
     , view: view
     , inputs: [routeSignal] }
 
+-- | Entry point for the browser.
+main :: State -> Eff (CoreEffects AppEffects) (App State Action)
+main state = do
+  app <- start =<< config state
   renderToDOM "#app" app.html
+  -- | Used by hot-reloading code in support/index.js
+  pure app
 
-  -- | Used by hot-reloading code in src/js/index.js
+-- | Entry point for the browser with pux-devtool injected.
+debug :: State -> Eff (CoreEffects AppEffects) (App State (Pux.Devtool.Action Action))
+debug state = do
+  app <- Pux.Devtool.start =<< config state
+  renderToDOM "#app" app.html
+  -- | Used by hot-reloading code in support/index.js
   pure app

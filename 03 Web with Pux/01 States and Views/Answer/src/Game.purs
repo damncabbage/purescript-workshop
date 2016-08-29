@@ -5,6 +5,7 @@ module App.Game
   ) where
 
 import Prelude
+import Data.Generic (class Generic, gShow) -- Ignore this line.
 
 data Hand   = Rock | Paper | Scissors
 data Result = P1Won | P2Won | Draw
@@ -33,8 +34,6 @@ winner h1 h2 = case h1, h2 of
 
 
 -- Unfortunate debugging boilerplate:
-import Data.Generic (class Generic, gShow)
-
 derive instance genHand :: Generic Hand
 derive instance genResult :: Generic Result
 
