@@ -1,6 +1,7 @@
 module App.Layout where
 
 import App.Play as Play
+import App.NotFound as NotFound
 import App.Routes (Route(Home, NotFound))
 import App.Types (AppEffects)
 import App.Utils (effectfulChild)
@@ -21,7 +22,7 @@ init = { route: NotFound
        , game: Play.init
        }
 
-update :: forall eff. Action -> State -> EffModel State Action (AppEffects eff)
+update :: Action -> State -> EffModel State Action AppEffects
 update (PageView route)  state =
   noEffects (state { route = route })
 update (PlayGame action) state =
@@ -32,10 +33,10 @@ view :: State -> Html Action
 view state =
   main [] [
     case state.route of
-      NotFound -> App.NotFound.view state
+      NotFound -> NotFound.view state
       Home ->
         div [ className "game-container" ]
-          [ h1 [] [ text "Example" ]
+          [ h1 [] [ text "Numbers" ]
           , forwardTo PlayGame (Play.view state.game)
           ]
   ]

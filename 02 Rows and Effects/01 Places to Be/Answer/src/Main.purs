@@ -5,13 +5,13 @@ import Math as Math
 import Data.Int as Int
 import Data.Foldable (sum)
 
--- We have a type called Object, and much in the same way as Maybe, it is a generalised type that has a type argument:
---   data Object a = ...
+-- We have a type called Record, and much in the same way as Maybe, it is a generalised type that has a type argument:
+--   data Record a = ...
 
 -- The argument that it takes is different: it takes a "Row" or "structural" type.
 -- For example:
-frank :: Object (postcode :: Int, state :: String, country :: String) -- The type
-frank = {   -- How you construct an Object type.
+frank :: Record (postcode :: Int, state :: String, country :: String) -- The type
+frank = {   -- How you construct an Record type.
   postcode: 2001,
   state: "NSW",
   country: "Australia"
@@ -26,18 +26,18 @@ kate = {
 }
 
 -- An aside for Haskellers: If you're already familiar with Kinds, there are
--- special types of Kind outside of the regular *s. For example, Object is
+-- special types of Kind outside of the regular *s. For example, Record is
 -- kind # * -> *, # * indicating a "row" kind. You can test this out by
 -- running this with psci:
---   > :kind Object
+--   > :kind Record
 -- And then
---   > :kind Object ( foo :: String )
+--   > :kind Record ( foo :: String )
 -- or
 --   > :kind { foo :: String }
 
 -- Anyway.
 -- We can make this easier by using a type alias, eg.
-type LocationObject = Object (postcode :: Int, state :: String, country :: String)
+type LocationRecord = Record (postcode :: Int, state :: String, country :: String)
 
 -- Or just (again, sugar):
 type Location = { postcode :: Int, state :: String, country :: String }
@@ -51,7 +51,7 @@ sam = { postcode: 4000, state: "QLD", country: "Australia" }
 -- you need to know is that it can be used to concatenate Strings, Arrays and some other things.
 locationToString :: Location -> String
 locationToString loc =
-  -- We're using Row Labels to retrieve values from the Object (AKA Record). This only works for Objects.
+  -- We're using Row Labels to retrieve values from the Record (AKA Record). This only works for Records.
   (show loc.postcode) <> " " <> loc.state <> ", " <> loc.country
 
 
@@ -59,7 +59,7 @@ locationToString loc =
 -- of a larger record.
 -- To indicate this, we have what's known as an "open row"; we use a type variable to indicate "some other
 -- fields we don't care about", eg.
-stateAndCountry :: forall theRest. Object ( state :: String, country :: String | theRest) -> String
+stateAndCountry :: forall theRest. Record ( state :: String, country :: String | theRest) -> String
 stateAndCountry loc =
   loc.state <> ", " <> loc.country
 
@@ -85,7 +85,7 @@ changeState loc newState = loc { state = newState }
 --       Finally, try calling stateAndCountry with { street: "Queen St", postcode: 4000, state: "QLD", country: "Australia" }
 --       Note the different between locationToString's "closed" row, and stateAndCountry's "open" row.
 
--- TODO: Write a type alias that is an Object ({}-shorthand or not) and has two fields, x and y, both Ints. Call it Point.
+-- TODO: Write a type alias that is an Record ({}-shorthand or not) and has two fields, x and y, both Ints. Call it Point.
 type Point = { x :: Int, y :: Int }
 
 -- TODO: Write a function that takes a Point and an Int, and replace the paint's X value with that Int.
@@ -117,7 +117,7 @@ distanceWithHelper p1 p2 =
 --       (but not limited to) a field of type Int called "x", and returns the "sum"
 --       (see Data.Foldable) of all those integers. A function called "map" from the
 --       Prelude will also be useful here.
-sumOfXArray :: forall rest. Array (Object (x :: Int | rest)) -> Int
+sumOfXArray :: forall rest. Array (Record (x :: Int | rest)) -> Int
 sumOfXArray xs =
   let getTheX record = record.x
    in sum (map getTheX xs)

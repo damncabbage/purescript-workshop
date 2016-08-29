@@ -1,0 +1,69 @@
+body {
+  background: white;
+  font-family: 'Open Sans', Arial, sans-serif;
+  font-size: 120%;
+}
+
+h1 { font-size: 1.5em; margin-top: 0; }
+h2 { font-size: 1em; margin-top: 0; }
+.game-container { text-align: center; }
+
+.game .selections {}
+.game .selections button {
+  font-size: 3em;
+}
+.game .selections button + button {
+  margin-left: 0.2em;
+}
+
+.game .scoreboard .score {
+  display: inline-block;
+  width: 3.5em;
+  margin-top: 1em;
+  font-size: 1.5em;
+}
+.game .scoreboard .score.me {
+  background: #e0f0e0;
+  margin-right: 0.7em;
+}
+.game .scoreboard .score.ai {
+  background: #e0d0d0;
+}
+.game .results {
+  display: block;
+  margin: 1.5em auto;
+  width: 300px;
+  text-align: left;
+}
+.game .results p {
+  margin-top: 0;
+  margin-bottom: 0em;
+}
+
+.game .previous-rounds {
+  display: block;
+  margin: 0 auto;
+  width: 350px;
+  text-align: left;
+  font-size: 0.8em;
+}
+.game .previous-rounds button {
+  display: inline-block;
+  position: relative;
+  bottom: 3px;
+  margin-left: 0.2em;
+  font-size: 0.7em;
+}
+
+@media only screen and (min-width: 900px) {
+  .game .play {
+    clear: left;
+    width: 49%; float: left;
+  }
+  .game .previous-rounds {
+    width: 49%; float: left;
+  }
+}
+
+/* Live demo button counter */
+.game > button { font-size: 1.5em; }

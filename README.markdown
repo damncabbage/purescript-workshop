@@ -1,26 +1,39 @@
 PureScript Workshop Exercises
 =============================
 
-This is a set of exercises for [YOW! Lamba Jam 2016](http://lambdajam.yowconference.com.au)'s PureScript workshop: _A Whirlwind Tour of PureScript_.
+This is a set of exercises for [YOW! Lamba Jam 2016](http://lambdajam.yowconference.com.au)'s and
+[Compose Melbourne 2016](http://www.composeconference.org/2016-melbourne/unconference/)'s PureScript
+workshop: _A Whirlwind Tour of PureScript_.
 
 
 ## Setup
 
-[Context: This workshop was meant to be tackled from inside a virtual machine (Virtualbox w/ an OVA). A bootstrap script was also provided in case people wanted to set up PureScript on their own machines.]
+There are two options:
 
-To get started:
+* Using a Virtual Machine, with an environment already set up with the code exercises, libraries,
+  and so on. This is the most fool-proof method.
+* Cloning this repo and running a bootstrap script, which downloads a small pile of things and tries
+  to set things up for you.
 
-1. Clone this git repo to somewhere local on your machine,
+
+The Virtual Machine method:
+
+1. Get a USB key.
+2. Copy off the `.ova` file and a VirtualBox installer.
+3. Install VirtualBox, and then open the `.ova` file. Start the VM when it's imported.
+
+
+The Clone + Setup method:
+
+1. Clone this git repo to somewhere local on your machine (eg. with `git clone https://github.com/damncabbage/purescript-workshop workshop`)
 2. Run the bootstrap setup script (with `./bootstrap.sh`, from inside the checked-out workshop directory).
-   This script will:
-   * Check and install any tools you need (Node, npm, PureScript / pcs, Pulp, purescript-psa, pscid), and
-   * Run a `bower install`, `npm install` and an `npm run -s build` on every exercise, to prepare
-     the exercises for you in advance (eg. if you're only connected to the 'net for a short while).
+3. Put up your hand if you get stuck.
 
-It's recommended that you use an editor with some PureScript integration. I recommend
-[Atom](https://atom.io/) set up with the [atom-ide-purescript](https://github.com/nwolverson/atom-ide-purescript)
-plugin, opening each exercise as a separate project. Alternatively, [pscid](https://github.com/kRITZCREEK/pscid) is
-an alternative that can be used as a file-watch + fast-rebuild tool with any editor.
+It's helpful to use an editor with some PureScript integration. I recommend [Atom](https://atom.io/)
+set up with the [atom-ide-purescript](https://github.com/nwolverson/atom-ide-purescript) plugin,
+opening each exercise as a separate project. Alternatively,
+[pscid](https://github.com/kRITZCREEK/pscid) is an alternative that can be used as a file-watch +
+fast-rebuild tool with any editor.
 
 
 ## Exercises
@@ -29,15 +42,17 @@ The exercises are broken up into sections and sub-sections, with each having its
 and Answer folders. Every Exercise and Answer is an independent program that can be interacted with
 in the following way:
 
-* **Build:** `npm run build` in an Exercise or Answer directory will rebuild that program and
+* **Build:** `npm run -s build` in an Exercise or Answer directory will rebuild that program and
   display errors and warnings. If you're using the VM with the Atom editor, this is being run for
   you on every save.
-* **Test:** `npm run test` will run any tests defined.
-* **Interactive Console Tool (REPL):** `npm run repl` will kick off `pulp psci`, an interactive command-line tool (like GHCI,
+* **Interactive Console Tool (REPL):** `npm run -s repl` will kick off `pulp psci`, an interactive command-line tool (like GHCI,
   `irb`, or `node` or `python` without arguments). Hit Ctrl-C to quit.
-* **Server:** Some later exercises have a web-based component; `npm run start` will start the
+* **Server:** Some later exercises have a web-based component; `npm run -s start` will start the
   Webpack+Express dev server, which also provides hot-reloading for quick feedback. Hit Ctrl-C to
   stop it.
+
+Additionally, there are a pile of generated API docs in Markdown format in each exercise's folder,
+under `devdocs/...`.
 
 
 ## How Do I Start?
@@ -65,7 +80,8 @@ then read and follow the instructions from the README.markdown file within.
   * 03 Effectful Updates
   * 04 Skynet
 
-* 04 FFI Playground
+* 04 FFI
+  * 99 Playground
 
 
 

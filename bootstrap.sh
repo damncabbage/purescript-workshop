@@ -5,10 +5,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 function prompt() {
   echo -n "*** I'm just about to $1 - is that okay? ([y]es, [n]o or [s]kip) > "
   read ANSWER
-  if [ $(echo "$ANSWER" | grep -ic '^y$') -eq 1 ]; then
+  if [ "$(echo "$ANSWER" | grep -ic '^y$')" -eq 1 ]; then
     echo '*** Proceeding...' >&2
     true
-  elif [ $(echo "$ANSWER" | grep -ic '^s$') -eq 1 ]; then
+  elif [ "$(echo "$ANSWER" | grep -ic '^s$')" -eq 1 ]; then
     echo '*** Skipping...' >&2
     false
   else
@@ -33,7 +33,7 @@ function installNodeMac() {
       echo -e "\nCan't find a version of Node available on Homebrew matching ${NODE_VERSION_REGEX} - you may need to update your local formula cache by running:\n  brew update\n"
       exit 1
     fi
-    "$HOMEBREW" install homebrew/versions/node4-lts # v4-6
+    "$HOMEBREW" install node
   fi
 }
 
@@ -59,7 +59,7 @@ function installNodeDebian() {
 set +e
   NODE=$(which node)
   NODE_CODE=$?
-  export NODE_VERSION_REGEX='[45]\.'
+  export NODE_VERSION_REGEX='[456]\.'
 set -e
 
 if [ "$NODE_CODE" -eq 0 ]; then
@@ -73,7 +73,7 @@ if [ "$NODE_CODE" -eq 0 ]; then
 else
   # Node bootstrapping
   SCRIPT_DIR=$(dirname "$0")
-  if [ $(uname -a | grep -ci Darwin) -gt 0 ]; then
+  if [ "$(uname -a | grep -ci Darwin)" -gt 0 ]; then
     installNodeMac
   elif [ -f "/etc/debian_version" ]; then
     installNodeDebian
@@ -96,16 +96,36 @@ else
   fi
 fi
 
-# psc, pulp and some editor tools
-if prompt "install purescript@0.8.5 bower pulp purescript-psa and pscid globally with npm install -g"; then
-  npm install -g purescript@0.8.5 bower pulp purescript-psa pscid
+if [ "$(echo "$PATH" | grep -c 'node_modules/\.bin')" -eq 0 ]; then
+  export PATH="$PATH:node_modules/.bin"
+  if prompt 'add a PATH entry (PATH="$PATH:node_modules/.bin") to your .bashrc'; then
+    echo ';export PATH="$PATH:node_modules/.bin"' >> ~/.bashrc
+  fi
 fi
 
-# bower installs
-# npm installs
+if prompt "npm install, bower install and generate devdocs for the exercise dependencies"; then
+  pushd "common/console"
+    bower install
+    npm install
+    for DIR in ../../0{1,2}*/*/*s*; do
+      cp -a node_modules "${DIR}/"
+    done
+    "${SCRIPT_DIR}/devdocs.sh"
+  popd
+
+  pushd "common/web"
+    bower install
+    npm install
+    for DIR in ../../0{3,4}*/*/*s*; do
+      cp -a node_modules "${DIR}/"
+    done
+    "${SCRIPT_DIR}/devdocs.sh"
+  popd
+fi
+
 # npm run build
-if prompt "bower install, npm install, generate development documentation and attempt builds for every exercise directory"; then
+if prompt "attempt builds for every exercise directory"; then
   for DIR in Exercise Answer; do
-    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && bower install && npm install && '"$SCRIPT_DIR"'/devdocs.sh && npm run -s build' \;
+    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && npm run -s build' \;
   done
 fi

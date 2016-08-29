@@ -1,0 +1,26 @@
+{
+  "name": "purs-workshop-console",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "output"
+  ],
+  "dependencies": {
+    "purescript-console": "^1.0.0",
+    "purescript-arrays": "^1.1.0",
+    "purescript-strings": "^1.1.0",
+    "purescript-generics": "^1.0.1",
+    "purescript-integers": "^1.1.0",
+    "purescript-math": "^2.0.0",
+    "purescript-foldable-traversable": "^1.0.0",
+    "purescript-random": "^1.0.0",
+    "purescript-eff": "^1.0.0",
+    "purescript-aff": "^1.1.0",
+    "purescript-foreign": "^1.1.0"
+  },
+  "devDependencies": {
+    "purescript-psci-support": "^1.0.0",
+    "purescript-debug": "^1.0.0"
+  }
+}

@@ -35,7 +35,7 @@ hasARandomEffect = do
 --       returns an array containing both of them.
 -- twoRandomInts :: ...
 
--- TODO: Harder: Use Data.Array's replicateM to make a function that
+-- TODO: Harder: Use Data.Unfoldable's replicateA to make a function that
 --       accepts an int N, and returns an array of N random integers.
 -- someRandomInts :: ...
 
