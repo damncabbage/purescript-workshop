@@ -5,10 +5,10 @@ SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 function prompt() {
   echo -n "*** I'm just about to $1 - is that okay? ([y]es, [n]o or [s]kip) > "
   read ANSWER
-  if [ $(echo "$ANSWER" | grep -ic '^y$') -eq 1 ]; then
+  if [ "$(echo "$ANSWER" | grep -ic '^y$')" -eq 1 ]; then
     echo '*** Proceeding...' >&2
     true
-  elif [ $(echo "$ANSWER" | grep -ic '^s$') -eq 1 ]; then
+  elif [ "$(echo "$ANSWER" | grep -ic '^s$')" -eq 1 ]; then
     echo '*** Skipping...' >&2
     false
   else
@@ -73,7 +73,7 @@ if [ "$NODE_CODE" -eq 0 ]; then
 else
   # Node bootstrapping
   SCRIPT_DIR=$(dirname "$0")
-  if [ $(uname -a | grep -ci Darwin) -gt 0 ]; then
+  if [ "$(uname -a | grep -ci Darwin)" -gt 0 ]; then
     installNodeMac
   elif [ -f "/etc/debian_version" ]; then
     installNodeDebian
@@ -96,7 +96,7 @@ else
   fi
 fi
 
-if [ $(echo "$PATH" | grep -c 'node_modules/\.bin') -eq 0 ]; then
+if [ "$(echo "$PATH" | grep -c 'node_modules/\.bin')" -eq 0 ]; then
   export PATH="$PATH:node_modules/.bin"
   if prompt 'add a PATH entry (PATH="$PATH:node_modules/.bin") to your .bashrc'; then
     echo ';export PATH="$PATH:node_modules/.bin"' >> ~/.bashrc
