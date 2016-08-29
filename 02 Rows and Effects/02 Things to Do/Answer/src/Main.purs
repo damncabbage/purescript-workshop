@@ -5,7 +5,7 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Random (RANDOM, randomInt)
 import Control.Monad.Eff.Console (CONSOLE, log)
-import Data.Array (replicateM)
+import Data.Unfoldable (replicateA)
 
 
 someRandomInt :: Eff (random :: RANDOM) Int
@@ -41,10 +41,10 @@ twoRandomInts = do
   n2 <- someRandomInt
   pure [n1,n2]
 
--- TODO: Harder: Use Data.Array's replicateM to make a function that
+-- TODO: Harder: Use Data.Unfoldable's replicateA to make a function that
 --       accepts an int N, and returns an array of N random integers.
 someRandomInts :: Int -> Eff (random :: RANDOM) (Array Int)
-someRandomInts n = replicateM n someRandomInt
+someRandomInts n = replicateA n someRandomInt
 
 -- TODO: Write a function that uses the console :: CONSOLE effect and returns
 --       Unit, and makes use of the "log" function from Control.Monad.Eff.Console

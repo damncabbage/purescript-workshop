@@ -1,6 +1,8 @@
 module Main where
 
 import Prelude
+import Data.Generic (class Generic, gShow) -- Ignore this line.
+
 
 -- An example type declaration:
 data TrafficLight = Red | Yellow | Green
@@ -31,11 +33,8 @@ data Result = AlsoToDo
 
 
 
-
-
-
-
-
+-- -------------------------------------- --
+-- -------------------------------------- --
 -- Ignore all the below; this is boilerplate to let you use
 -- your custom types in psci, and with any luck should go away
 -- shortly.
@@ -43,7 +42,6 @@ data Result = AlsoToDo
 --  equivalent, only Generic, Eq and Ord. This piggy-backs off
 --  Data.Generic's gShow :: forall a. (Generic a) => a -> String
 --  function.)
-import Data.Generic (class Generic, gShow)
 derive instance genericTrafficLight :: Generic TrafficLight
 derive instance genericHand :: Generic Hand
 derive instance genericResult :: Generic Result

@@ -5,12 +5,12 @@ import Prelude
 import Control.Monad.Eff (Eff)
 import Control.Monad.Eff.Random (RANDOM, randomInt)
 import Control.Monad.Eff.Console (CONSOLE, log)
-import Data.Array (replicateM)
+import Data.Unfoldable (replicateA)
 
 
 someRandomInts :: Int -> Eff (random :: RANDOM) (Array Int)
 someRandomInts n =
-  replicateM n (randomInt 0 999)
+  replicateA n (randomInt 0 999)
 
 someLogging :: String -> Eff (console :: CONSOLE) Unit
 someLogging x = do
@@ -48,7 +48,7 @@ wrapper2 = do
 
 openRandomInts :: forall eff. Int -> Eff (random :: RANDOM | eff) (Array Int)
 openRandomInts n =
-  replicateM n (randomInt 0 999)
+  replicateA n (randomInt 0 999)
 
 -- TODO: Write an openLogging function using an open effect row, uncomment its use below,
 --       and see what happens.

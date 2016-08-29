@@ -1,6 +1,7 @@
 module Main where
 
 import Prelude
+import Data.Generic (class Generic, gShow) -- Ignore this line.
 import Data.Array as Array
 import Data.Maybe (Maybe(..))
 
@@ -105,10 +106,11 @@ getSecond a b c = b
 
 
 
+-- -------------------------------------- --
+-- -------------------------------------- --
 -- Ignore all the below; this is boilerplate to let you use
 -- your custom types in psci, and with any luck should go away
 -- shortly.
-import Data.Generic (class Generic, gShow)
 derive instance genericHand :: Generic Hand
 derive instance genericResult :: Generic Result
 instance showHand :: Show Hand where
