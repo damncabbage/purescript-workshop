@@ -16,7 +16,8 @@
     "purescript-foldable-traversable": "^1.0.0",
     "purescript-random": "^1.0.0",
     "purescript-eff": "^1.0.0",
-    "purescript-aff": "^1.1.0"
+    "purescript-aff": "^1.1.0",
+    "purescript-foreign": "^1.1.0"
   },
   "devDependencies": {
     "purescript-psci-support": "^1.0.0",
