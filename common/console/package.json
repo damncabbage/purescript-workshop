@@ -1,0 +1,25 @@
+{
+  "name": "purs-workshop-console",
+  "version": "0.0.1",
+  "description": "Console exercise/answer for the PureScript workshop.",
+  "main": "output/bundle.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "pscid": "^1.11.0",
+    "pulp": "^9.0.1",
+    "purescript": "^0.9.1",
+    "purescript-psa": "^0.3.5"
+  },
+  "scripts": {
+    "build": "pulp build --include test --censor-codes=WildcardInferredType,HidingImport,UnnecessaryFFIModule",
+    "bundle": "pulp build -O --to output/bundle.js --censor-codes=WildcardInferredType,HidingImport,UnnecessaryFFIModule",
+    "test": "pulp test --censor-codes=WildcardInferredType,HidingImport,UnnecessaryFFIModule",
+    "repl": "pulp psci",
+    "start": "echo 'Not relevant to this exercise.' && exit 1"
+  },
+  "author": "Rob Howard <rob@robhoward.id.au>",
+  "license": "Apache-2.0"
+}

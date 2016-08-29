@@ -96,16 +96,34 @@ else
   fi
 fi
 
-# psc, pulp and some editor tools
-if prompt "install purescript@0.8.5 bower pulp purescript-psa and pscid globally with npm install -g"; then
-  npm install -g purescript@0.8.5 bower pulp purescript-psa pscid
+if [ $(echo "$PATH" | grep -c 'node_modules/\.bin') -eq 0 ]; then
+  export PATH="$PATH:node_modules/.bin"
+  if prompt 'add a PATH entry (PATH="$PATH:node_modules/.bin") to your .bashrc'; then
+    echo ';export PATH="$PATH:node_modules/.bin"' >> ~/.bashrc
+  fi
 fi
 
-# bower installs
-# npm installs
+if prompt "npm install and bower install"; then
+  pushd "common/console"
+    bower install
+    npm install
+    for DIR in 0{1,2}*/*/{Exercise,Answer}; do
+      cp -a node_modules "../../${DIR}/"
+    done
+  popd
+
+  pushd "common/web"
+    bower install
+    npm install
+    for DIR in 0{3,4}*/*/{Exercise,Answer}; do
+      cp -a node_modules "../../${DIR}/"
+    done
+  popd
+fi
+
 # npm run build
-if prompt "bower install, npm install, generate development documentation and attempt builds for every exercise directory"; then
+if prompt "generate development documentation and attempt builds for every exercise directory"; then
   for DIR in Exercise Answer; do
-    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && bower install && npm install && '"$SCRIPT_DIR"'/devdocs.sh && npm run -s build' \;
+    find . -type d -name "$DIR" -exec sh -c 'cd "{}" && echo "+++ {} +++" && '"$SCRIPT_DIR"'/devdocs.sh && npm run -s build' \;
   done
 fi
