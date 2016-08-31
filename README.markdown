@@ -8,26 +8,11 @@ workshop: _A Whirlwind Tour of PureScript_.
 
 ## Setup
 
-There are two options:
-
-* Using a Virtual Machine, with an environment already set up with the code exercises, libraries,
-  and so on. This is the most fool-proof method.
-* Cloning this repo and running a bootstrap script, which downloads a small pile of things and tries
-  to set things up for you.
-
-
-The Virtual Machine method:
-
-1. Get a USB key.
-2. Copy off the `.ova` file and a VirtualBox installer.
-3. Install VirtualBox, and then open the `.ova` file. Start the VM when it's imported.
-
-
-The Clone + Setup method:
+This repository has a bootstrap script, which downloads a small pile of things and sets things up for you. To get this going:
 
 1. Clone this git repo to somewhere local on your machine (eg. with `git clone https://github.com/damncabbage/purescript-workshop workshop`)
 2. Run the bootstrap setup script (with `./bootstrap.sh`, from inside the checked-out workshop directory).
-3. Put up your hand if you get stuck.
+3. Put an issue in this repo if you get stuck.
 
 It's helpful to use an editor with some PureScript integration. I recommend [Atom](https://atom.io/)
 set up with the [atom-ide-purescript](https://github.com/nwolverson/atom-ide-purescript) plugin,
