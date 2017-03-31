@@ -38,18 +38,18 @@ function installNodeMac() {
 }
 
 function installNodeRH() {
-  if prompt "install Node on your RedHat box with a 'curl -sL https://rpm.nodesource.com/setup_5.x | sudo -E bash -'"; then
+  if prompt "install Node on your RedHat box with a 'curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -'"; then
     set -x
-      curl -sL https://rpm.nodesource.com/setup_5.x | sudo -E bash -
+      curl -sL https://rpm.nodesource.com/setup_6.x | sudo -E bash -
       sudo yum install -y nodejs
     set +x
   fi
 }
 
 function installNodeDebian() {
-  if prompt "install Node on your Debian/Ubuntu box with a 'curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -'"; then
+  if prompt "install Node on your Debian/Ubuntu box with a 'curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -'"; then
     set -x
-      curl -sL https://deb.nodesource.com/setup_5.x | sudo -E bash -
+      curl -sL https://deb.nodesource.com/setup_6.x | sudo -E bash -
       sudo apt-get install -y nodejs
     set +x
   fi
@@ -59,7 +59,7 @@ function installNodeDebian() {
 set +e
   NODE=$(which node)
   NODE_CODE=$?
-  export NODE_VERSION_REGEX='[456]\.'
+  export NODE_VERSION_REGEX='[^0123]\.'
 set -e
 
 if [ "$NODE_CODE" -eq 0 ]; then
@@ -88,11 +88,11 @@ fi
 # npm
 # Upgrade npm? (npm v2 is bundled with Node, so we can at least rely on it existing.)
 NPM_VERSION=$(npm --version)
-if [ "$(echo "$NPM_VERSION" | grep -c '^3\.')" -eq 1 ]; then
+if [ "$(echo "$NPM_VERSION" | grep -c '^[^12]\.')" -eq 1 ]; then
   echo "*** npm ${NPM_VERSION} already installed."
 else
-  if prompt "install npm v3+ globally with 'npm install -g npm@3'"; then
-    npm install -g npm@3 # 3+, eg. 3.5.1
+  if prompt "upgrade npm globally with 'npm install -g npm'"; then
+    npm install -g npm
   fi
 fi
 
