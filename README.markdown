@@ -20,6 +20,11 @@ opening each exercise as a separate project. Alternatively,
 [pscid](https://github.com/kRITZCREEK/pscid) is an alternative that can be used as a file-watch +
 fast-rebuild tool with any editor.
 
+[Author's notes: This set of exercises uses an oldish version of PureScript (0.9.3). This sounds bad,
+but the exercises themselves won't really be affected by the language upgrades; it's all
+behind-the-scenes stuff. All the same, I'll be looking at upgrading this repo shortly to both
+PureScript 0.10.x and the new release of Pux.]
+
 
 ## Exercises
 
